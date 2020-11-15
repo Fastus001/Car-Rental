@@ -1,13 +1,13 @@
 package pl.tomek.main;
 
-import pl.tomek.cars.AvailableCars;
-import pl.tomek.cars.Car;
+import pl.tomek.car.AvailableCars;
+import pl.tomek.car.Car;
 import pl.tomek.menu.Menu;
 import pl.tomek.rent.RentHistory;
-import pl.tomek.users.User;
-import pl.tomek.users.UserList;
+import pl.tomek.user.User;
+import pl.tomek.user.UserList;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         Car car = new Car("Opel","Astra", 125000,1990,12,12,23);
         Car car2 = new Car("Mercedes","CLA", 12500,2017,2,12,1245.59);

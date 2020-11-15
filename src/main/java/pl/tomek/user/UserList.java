@@ -1,4 +1,4 @@
-package pl.tomek.users;
+package pl.tomek.user;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,9 +13,12 @@ public class UserList {
 
     public void showAllNotActiveUsers()
     {
+        int counter = 1;
         for (int i = 0; i < users.size(); i++) {
-            if(!users.get(i).isActive())
-                System.out.println("Id: "+ (i + 1) +": " + users.get(i).showUser());
+            if(!users.get(i).isActive()){
+                System.out.println(counter +": " + users.get(i).showUser());
+                counter++;
+            }
         }
     }
 
@@ -42,9 +45,23 @@ public class UserList {
             Scanner in = new Scanner(System.in);
             System.out.println("Give user ID to activate: ");
             int input = in.nextInt();
-            users.get(input-1).setActive(true);
+            findNotActiveUser(input);
         }else
             System.out.println("All users are active!");
+    }
+
+    private void findNotActiveUser(int index)
+    {
+        int counter = 0;
+        for (int i = 0; i < users.size(); i++) {
+            if(!users.get(i).isActive())
+            {
+                counter++;
+                if(counter==index)
+                    users.get(i).setActive(true);
+            }
+
+        }
     }
 
     public void addNewUser()

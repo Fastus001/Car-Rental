@@ -1,7 +1,7 @@
 package pl.tomek.rent;
 
-import pl.tomek.cars.Car;
-import pl.tomek.users.User;
+import pl.tomek.car.Car;
+import pl.tomek.user.User;
 
 import java.math.BigDecimal;
 

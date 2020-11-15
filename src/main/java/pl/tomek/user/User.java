@@ -1,4 +1,4 @@
-package pl.tomek.users;
+package pl.tomek.user;
 
 import pl.tomek.main.Validate;
 
@@ -79,5 +79,14 @@ public class User {
         }
 
         return new User(name,sureName,pesel,0);
+    }
+
+    public int getAge()
+    {
+        return LocalDate.now().getYear()-birthday.getYear();
+    }
+
+    public int getNumberOfRentedCars() {
+        return this.numberOfRentedCars;
     }
 }

@@ -1,4 +1,4 @@
-package pl.tomek.cars;
+package pl.tomek.car;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -54,7 +54,8 @@ public class AvailableCars {
 
     public void addNewCar()
     {
-        availableCars.add(Car.makeNewCar());
+        if(Car.makeNewCar()!=null)
+            availableCars.add(Car.makeNewCar());
     }
 
     public Car getCar(int i) {

@@ -1,10 +1,10 @@
 package pl.tomek.menu;
 
 import pl.tomek.accounting.Account;
-import pl.tomek.cars.AvailableCars;
+import pl.tomek.car.AvailableCars;
 import pl.tomek.main.Greetings;
 import pl.tomek.rent.RentHistory;
-import pl.tomek.users.UserList;
+import pl.tomek.user.UserList;
 
 import java.util.Scanner;
 

@@ -1,8 +1,8 @@
 package pl.tomek.rent;
 
 import pl.tomek.accounting.Account;
-import pl.tomek.cars.AvailableCars;
-import pl.tomek.users.UserList;
+import pl.tomek.car.AvailableCars;
+import pl.tomek.user.UserList;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ public class RentHistory {
         Scanner in = new Scanner(System.in);
             System.out.println("Select user by ID: ");
             int id = in.nextInt();
+            var user = userList.getUser(id);
 
             availableCars.showAvailableCars();
             System.out.println("Select car: ");
@@ -39,19 +40,32 @@ public class RentHistory {
             int days = in.nextInt();
 
             var car = availableCars.getCar(carId);
-            BigDecimal amount = car.getRentCost().multiply(BigDecimal.valueOf(days));
+            int disc = getDiscoutForUser(user);
+
+            double d = disc/10.0;
+            BigDecimal discount = BigDecimal.valueOf(d);
+            System.out.println(discount);
+            BigDecimal amount = car.getRentCost().multiply(BigDecimal.valueOf(days)).multiply(discount);
             System.out.print("Rent will cost "+ amount + "Are you sure ? [yes/no]");
             String yesOrNo = in.next();
             if(yesOrNo.contains("yes"))
             {
                 availableCars.moveCarToRented(carId);
-                addRent(new Rent(userList.getUser(id),car,days));
+                addRent(new Rent(user,car,days));
                 account.addAmount(amount);
                 System.out.println("Car rented");
             }else
                 System.out.println("Car not rented!!!");
 
+    }
 
+    private int getDiscoutForUser(pl.tomek.user.User user) {
+        int disc = 10;
+        if(user.getAge()>40)
+            disc--;
+        if(user.getNumberOfRentedCars()>100)
+            disc--;
+        return disc;
     }
 
 

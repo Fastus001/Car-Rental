@@ -1,4 +1,4 @@
-package pl.tomek.cars;
+package pl.tomek.car;
 
 import pl.tomek.main.Validate;
 
@@ -58,19 +58,18 @@ public class Car {
 
         System.out.println("Specify year of production(in format yyyy-mm-dd): ");
         String data = in.next();
-        while (!Validate.validateDataFormat(data))
+        if(Validate.validateDataFormat(data))
         {
-            System.out.println("Enter correct date (in format yyyy-mm-dd)!: ");
-            data = in.next();
-        }
-
-        String[] date = data.split("-");
-        int year = Integer.parseInt(date[0]);
-        int month = Integer.parseInt(date[1]);
-        int day = Integer.parseInt(date[2]);
-        System.out.println("Specify price per day: ");
-        double rent = in.nextDouble();
-        return new Car(brand,model,mileage,year,month,day,rent);
+            String[] date = data.split("-");
+            int year = Integer.parseInt(date[0]);
+            int month = Integer.parseInt(date[1]);
+            int day = Integer.parseInt(date[2]);
+            System.out.println("Specify price per day: ");
+            double rent = in.nextDouble();
+            return new Car(brand,model,mileage,year,month,day,rent);
+        }else
+            System.out.println("Date format not correct, adding new car aborted!");
+        return null;
     }
 
 }
