@@ -14,7 +14,7 @@ public class Validate {
 
     public static boolean validateDataFormat(String data)
     {
-        if(data.length()!=9)
+        if(data.length()!=10)
             return false;
         Pattern pattern = Pattern.compile("(\\d{4}-\\d{2}-\\d{2})");
         return pattern.matcher(data).matches();

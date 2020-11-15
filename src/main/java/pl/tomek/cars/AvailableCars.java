@@ -2,35 +2,28 @@ package pl.tomek.cars;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class AvailableCars {
-    private ArrayList<Car> availableCars = new ArrayList<>();
-    private ArrayList<Car> notAvailableCars = new ArrayList<>();
-
-    public AvailableCars() {
-        this.availableCars = availableCars;
-    }
+    private final ArrayList<Car> availableCars = new ArrayList<>();
+    private final ArrayList<Car> notAvailableCars = new ArrayList<>();
     
     public void addCar(Car car)
     {
-        if(availableCars.size()<100)
+        if(availableCars.size() + notAvailableCars.size()<100)
             availableCars.add(car);
         else
-            System.out.println("Została osiągnięta maksymalna ilość samochodó w wypożyczalni.");
+            System.out.println("Maximum capacity of cars in our company reached!");
     }
     
     public void showAvailableCars()
     {
-        for (int i = 0; i < availableCars.size(); i++) {
-                System.out.println(Integer.toString(i+1)+": " + availableCars.get(i).showCar());
-        }
-    }
 
-    public void showNotAvailableCars()
-    {
-        for (int i = 0; i < notAvailableCars.size(); i++) {
-                System.out.println(Integer.toString(i+1)+": " + notAvailableCars.get(i).showCar());
+        if(availableCars.size()==0)
+            System.out.println("There is not available car to rent!");
+        else {
+            for (int i = 0; i < availableCars.size(); i++) {
+                System.out.println((i + 1) + ": " + availableCars.get(i).showCar());
+            }
         }
     }
 
@@ -39,6 +32,13 @@ public class AvailableCars {
         Car car = availableCars.get(index-1);
         availableCars.remove(index-1);
         notAvailableCars.add(car);
+    }
+
+    public void moveCarToNotRented(int index)
+    {
+        Car car = notAvailableCars.get(index-1);
+        notAvailableCars.remove(index-1);
+        availableCars.add(car);
     }
 
     public void editRentalPrice()
@@ -56,7 +56,6 @@ public class AvailableCars {
     {
         availableCars.add(Car.makeNewCar());
     }
-
 
     public Car getCar(int i) {
         return availableCars.get(i-1);

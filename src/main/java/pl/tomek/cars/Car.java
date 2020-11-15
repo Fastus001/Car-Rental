@@ -9,16 +9,15 @@ import java.util.Scanner;
 public class Car {
     private final String brand;
     private final String model;
-    private int mileage;
+    private final int mileage;
     private final LocalDate yearOfProduction;
     private BigDecimal rent;
-    private boolean isNotRented;
 
     public void setRent(double rent) {
         if(rent>0)
              this.rent = BigDecimal.valueOf(rent);
         else
-            System.out.println("Podałeś cenę mniejszą niż zero, nie udało się zmienić ceny wynajmu!");
+            System.out.println("Price you give is lover then 0, rent price have to be above 0!");
     }
 
     public Car(String brand, String model, int mileage, int year, int month, int day, double rent) {
@@ -27,7 +26,6 @@ public class Car {
         this.mileage = mileage;
         this.yearOfProduction = LocalDate.of(year,month,day);
         this.rent = BigDecimal.valueOf(rent);
-        this.isNotRented = true;
     }
 
     public String showCar() {
@@ -35,6 +33,11 @@ public class Car {
                 ", mileage = " + mileage +
                 ", year of production = " + yearOfProduction +
                 ", rent = " + rent;
+    }
+
+    public String showBrandAndModel()
+    {
+        return brand + " " + model;
     }
 
     public BigDecimal getRentCost() {

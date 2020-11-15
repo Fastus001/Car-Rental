@@ -13,7 +13,7 @@ public class User {
     private int numberOfRentedCars;
     private boolean active;
 
-    public void increasseNumberOfRentedCars() {
+    public void increaseNumberOfRentedCars() {
         this.numberOfRentedCars++;
     }
 
@@ -26,7 +26,10 @@ public class User {
         this.active = false;
     }
 
-
+    public String getNameAndSureName()
+    {
+        return name + " " + sureName;
+    }
 
     private LocalDate parsePesel(String input)
     {
