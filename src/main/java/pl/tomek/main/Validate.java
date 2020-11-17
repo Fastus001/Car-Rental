@@ -2,6 +2,7 @@ package pl.tomek.main;
 
 import pl.tomek.car.Car;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -45,6 +46,20 @@ public class Validate {
         }else
             System.out.println("Date format not correct, adding new car aborted!");
         return null;
+    }
+
+    public static LocalDate parsePeselID(String input)
+    {
+        int year = Integer.parseInt(input.substring(0,2));
+        int month = Integer.parseInt(input.substring(2,4));
+        if(month>20){
+            year += 2000;
+            month -= 20;
+        }
+        else
+            year += 1900;
+        int day = Integer.parseInt(input.substring(4,6));
+        return LocalDate.of(year,month,day);
     }
 
 }

@@ -33,12 +33,7 @@ public class Car {
         return brand + "-" + model +
                 ", mileage = " + mileage +
                 ", year of production = " + yearOfProduction +
-                ", rent = " + currencyFormat(rent);
-    }
-
-    public static String currencyFormat(BigDecimal bd)
-    {
-        return NumberFormat.getCurrencyInstance().format(bd);
+                ", rent = " + NumberFormat.getCurrencyInstance().format(rent);
     }
 
     public String showBrandAndModel()

@@ -14,9 +14,9 @@ public class UserList {
     public void showAllNotActiveUsers()
     {
         int counter = 1;
-        for (int i = 0; i < users.size(); i++) {
-            if(!users.get(i).isActive()){
-                System.out.println(counter +": " + users.get(i).showUser());
+        for (User user : users) {
+            if ( !user.isActive() ) {
+                System.out.println( counter + ": " + user.showUser() );
                 counter++;
             }
         }
@@ -24,7 +24,9 @@ public class UserList {
 
     public void showAllActiveUsers()
     {
-        long count = users.stream().filter(User::isActive).count();
+        long count = users.stream()
+                .filter(User::isActive)
+                .count();
         if(count==0)
             System.out.println("No active Users!");
         else
@@ -39,7 +41,9 @@ public class UserList {
     public void setUserActive()
     {
         showAllNotActiveUsers();
-        long count = users.stream().filter(user -> !user.isActive()).count();
+        long count = users.stream()
+                .filter(user -> !user.isActive())
+                .count();
         if(count!=0)
         {
             Scanner in = new Scanner(System.in);
@@ -53,20 +57,18 @@ public class UserList {
     private void findNotActiveUser(int index)
     {
         int counter = 0;
-        for (int i = 0; i < users.size(); i++) {
-            if(!users.get(i).isActive())
-            {
+        for (User user : users) {
+            if ( !user.isActive() ) {
                 counter++;
-                if(counter==index)
-                    users.get(i).setActive(true);
+                if ( counter == index )
+                    user.setActive( true );
             }
-
         }
     }
 
     public void addNewUser()
     {
-        users.add(User.build());
+        users.add(User.buildUser());
     }
 
     public User getUser(int index)

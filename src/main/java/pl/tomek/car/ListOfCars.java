@@ -5,7 +5,7 @@ import pl.tomek.main.Validate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AvailableCars {
+public class ListOfCars {
     private final ArrayList<Car> availableCars = new ArrayList<>();
     private final ArrayList<Car> notAvailableCars = new ArrayList<>();
     
@@ -19,9 +19,8 @@ public class AvailableCars {
     
     public void showAvailableCars()
     {
-
         if(availableCars.size()==0)
-            System.out.println("There is not available car to rent!");
+            System.out.println("There is no available car to rent!");
         else {
             for (int i = 0; i < availableCars.size(); i++) {
                 System.out.println((i + 1) + ": " + availableCars.get(i).showCar());
@@ -31,16 +30,12 @@ public class AvailableCars {
 
     public void moveCarToRented(int index)
     {
-        Car car = availableCars.get(index-1);
-        availableCars.remove(index-1);
-        notAvailableCars.add(car);
+        notAvailableCars.add(availableCars.remove(index-1));
     }
 
     public void moveCarToNotRented(int index)
     {
-        Car car = notAvailableCars.get(index-1);
-        notAvailableCars.remove(index-1);
-        availableCars.add(car);
+        availableCars.add(notAvailableCars.remove(index-1));
     }
 
     public void editRentalPrice()
@@ -49,7 +44,7 @@ public class AvailableCars {
         Scanner in = new Scanner(System.in);
         System.out.println("Give item number to change rent price");
         int number = in.nextInt();
-        System.out.println("Give new rental prive: ");
+        System.out.println("Give new rental price: ");
         availableCars.get(number-1).setRent(in.nextBigDecimal());
     }
 

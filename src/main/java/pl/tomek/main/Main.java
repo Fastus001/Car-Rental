@@ -1,6 +1,6 @@
 package pl.tomek.main;
 
-import pl.tomek.car.AvailableCars;
+import pl.tomek.car.ListOfCars;
 import pl.tomek.car.Car;
 import pl.tomek.menu.Menu;
 import pl.tomek.rent.RentHistory;
@@ -18,13 +18,13 @@ public class Main {
         UserList userList = new UserList();
         userList.addUser(user1);
         userList.addUser(user2);
-        AvailableCars availableCars = new AvailableCars();
-        availableCars.addCar(car);
-        availableCars.addCar(car2);
-        availableCars.addCar(car3);
+        ListOfCars listOfCars = new ListOfCars();
+        listOfCars.addCar(car);
+        listOfCars.addCar(car2);
+        listOfCars.addCar(car3);
 
         RentHistory rentHistory = new RentHistory();
-        Menu menu = new Menu(userList,availableCars, rentHistory);
+        Menu menu = new Menu(userList, listOfCars, rentHistory);
         menu.menuOptions();
 
     }

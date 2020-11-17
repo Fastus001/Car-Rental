@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class User {
     private final String name;
-    private final String sureName;
-    private final String peselId;
+    private final String surName;
+    private final String userId;
     private final LocalDate birthday;
     private int numberOfRentedCars;
     private boolean active;
@@ -17,32 +17,18 @@ public class User {
         this.numberOfRentedCars++;
     }
 
-    public User(String name, String sureName, String peselId, int numberOfRentedCars) {
+    public User(String name, String surName, String userId, int numberOfRentedCars) {
         this.name = name;
-        this.sureName = sureName;
-        this.peselId = peselId;
-        this.birthday = parsePesel(peselId);
+        this.surName = surName;
+        this.userId = userId;
+        this.birthday = Validate.parsePeselID( userId );
         this.numberOfRentedCars = numberOfRentedCars;
         this.active = false;
     }
 
     public String getNameAndSureName()
     {
-        return name + " " + sureName;
-    }
-
-    private LocalDate parsePesel(String input)
-    {
-        int year = Integer.parseInt(input.substring(0,2));
-        int month = Integer.parseInt(input.substring(2,4));
-        if(month>20){
-            year = 2000+year;
-            month = month-20;
-        }
-        else
-            year = 1900+year;
-        int day = Integer.parseInt(input.substring(4,6));
-        return LocalDate.of(year,month,day);
+        return name + " " + surName;
     }
 
     public void setActive(boolean active) {
@@ -54,14 +40,20 @@ public class User {
     }
 
     public String showUser() {
-        return "Name='" + name + '\'' +
-                ", Sure name='" + sureName + '\'' +
-                ", PESEL='" + peselId + '\'' +
-                ", date of birthday=" + birthday +
-                ", number of rented cars=" + numberOfRentedCars;
+        return new StringBuilder("Name= ")
+                .append( name )
+                .append( ", Surname= " )
+                .append( surName )
+                .append( ", PESEL = ")
+                .append( userId )
+                .append( ", date of birthday = " )
+                .append( birthday )
+                .append( ", number of rented cars = " )
+                .append( numberOfRentedCars)
+                .toString();
     }
 
-    public static User build() {
+    public static User buildUser() {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter name: ");
         String name = in.next();
@@ -77,7 +69,6 @@ public class User {
             System.out.println("Enter correct pesel (11 digits)!: ");
             pesel = in.next();
         }
-
         return new User(name,sureName,pesel,0);
     }
 

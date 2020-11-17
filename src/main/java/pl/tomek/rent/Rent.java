@@ -28,5 +28,4 @@ public class Rent {
                 " for a total cost of " +
                 NumberFormat.getCurrencyInstance().format(this.amount);
     }
-
 }

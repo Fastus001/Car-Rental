@@ -7,12 +7,12 @@ import java.time.Month;
 import java.util.ArrayList;
 
 public class Account {
-
+    private static final int MONTHS = 12;
     private final ArrayList<BigDecimal> earnings = new ArrayList<>();
     private final ArrayList<Integer> numberOfRentals = new ArrayList<>();
-    public Account() {
 
-        for (int i = 0; i < 12; i++) {
+    public Account() {
+        for (int i = 0; i < MONTHS; i++) {
             earnings.add(BigDecimal.ZERO);
             numberOfRentals.add(0);
         }
@@ -49,12 +49,13 @@ public class Account {
     public void yearReport()
     {
         System.out.println("Year " + LocalDate.now().getYear()+ " summary.");
-        for (int i = 0; i < 12; i++) {
-            var sb = "Earrings for " +
-                    Month.of(i + 1).name() +
-                    ". Total number of rentals: " +
-                    numberOfRentals.get(i) + ". Income:" +
-                    NumberFormat.getCurrencyInstance().format(earnings.get(i));
+        for (int i = 0; i < MONTHS; i++) {
+            var sb = new StringBuilder("Earrings for ")
+                    .append(Month.of(i + 1).name())
+                    .append(". Total number of rentals: ")
+                    .append(numberOfRentals.get(i))
+                    .append(". Income:")
+                    .append(NumberFormat.getCurrencyInstance().format(earnings.get(i)));
             System.out.println(sb);
         }
         System.out.println(sumYearMessage());
@@ -62,14 +63,13 @@ public class Account {
 
     private String sumYearMessage()
     {
-        Double yearSum = getYearSum();
-        Integer sumOfRentals = getSumOfRentals();
-        String sb = "Earrings for " + LocalDate.now().getYear() +
-                ". Total numbers of rentals: " +
-                sumOfRentals +
-                " Income: " +
-                yearSum;
-        return sb;
+        var sb = new StringBuilder("Earrings for ")
+                .append(LocalDate.now().getYear())
+                .append(". Total numbers of rentals: ")
+                .append(getSumOfRentals())
+                .append(" Income: ")
+                .append(NumberFormat.getCurrencyInstance().format(getYearSum()));
+        return sb.toString();
     }
 
     @org.jetbrains.annotations.NotNull
@@ -80,11 +80,10 @@ public class Account {
     }
 
     @org.jetbrains.annotations.NotNull
-    private Double getYearSum() {
+    private BigDecimal getYearSum() {
         return earnings.stream()
-                .map(BigDecimal::doubleValue)
-                .reduce(Double::sum)
-                .orElse(-1.0);
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
     }
 
 }
