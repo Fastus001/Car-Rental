@@ -22,12 +22,12 @@ public class Account {
     {
         int month = LocalDate.now().getMonthValue();
         BigDecimal monthSum = earnings.get(month - 1);
-        addOneToNumbrOfRentals(month);
+        addOneToNumberOfRentals(month);
         BigDecimal newSum = monthSum.add(bigDecimal);
         earnings.set(month-1,newSum);
     }
 
-    private void addOneToNumbrOfRentals(int month) {
+    private void addOneToNumberOfRentals(int month) {
         Integer nOfRentals = numberOfRentals.get(month -1);
         nOfRentals += 1;
         numberOfRentals.set(month -1, nOfRentals);
@@ -57,10 +57,10 @@ public class Account {
                     NumberFormat.getCurrencyInstance().format(earnings.get(i));
             System.out.println(sb);
         }
-        System.out.println(sumYearMessaage());
+        System.out.println(sumYearMessage());
     }
 
-    private String sumYearMessaage()
+    private String sumYearMessage()
     {
         Double yearSum = getYearSum();
         Integer sumOfRentals = getSumOfRentals();

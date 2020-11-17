@@ -4,6 +4,7 @@ import pl.tomek.car.Car;
 import pl.tomek.user.User;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 public class Rent {
     private final User person;
@@ -25,7 +26,7 @@ public class Rent {
                 car.showBrandAndModel() +
                 " for " + this.numberOfDays +
                 " for a total cost of " +
-                this.amount;
+                NumberFormat.getCurrencyInstance().format(this.amount);
     }
 
 }
