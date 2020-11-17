@@ -3,6 +3,7 @@ package pl.tomek.car;
 import pl.tomek.main.Validate;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -13,9 +14,9 @@ public class Car {
     private final LocalDate yearOfProduction;
     private BigDecimal rent;
 
-    public void setRent(double rent) {
-        if(rent>0)
-             this.rent = BigDecimal.valueOf(rent);
+    public void setRent(BigDecimal rent) {
+        if(rent.compareTo(BigDecimal.ZERO)>0)
+             this.rent = rent;
         else
             System.out.println("Price you give is lover then 0, rent price have to be above 0!");
     }
@@ -32,7 +33,12 @@ public class Car {
         return brand + "-" + model +
                 ", mileage = " + mileage +
                 ", year of production = " + yearOfProduction +
-                ", rent = " + rent;
+                ", rent = " + currencyFormat(rent);
+    }
+
+    public static String currencyFormat(BigDecimal bd)
+    {
+        return NumberFormat.getCurrencyInstance().format(bd);
     }
 
     public String showBrandAndModel()
@@ -42,34 +48,6 @@ public class Car {
 
     public BigDecimal getRentCost() {
         return rent;
-    }
-
-    public static Car makeNewCar()
-    {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Specify brand: ");
-        String brand = in.next();
-
-        System.out.println("Specify model: ");
-        String model = in.next();
-
-        System.out.println("Specify mileage: ");
-        int mileage = in.nextInt();
-
-        System.out.println("Specify year of production(in format yyyy-mm-dd): ");
-        String data = in.next();
-        if(Validate.validateDataFormat(data))
-        {
-            String[] date = data.split("-");
-            int year = Integer.parseInt(date[0]);
-            int month = Integer.parseInt(date[1]);
-            int day = Integer.parseInt(date[2]);
-            System.out.println("Specify price per day: ");
-            double rent = in.nextDouble();
-            return new Car(brand,model,mileage,year,month,day,rent);
-        }else
-            System.out.println("Date format not correct, adding new car aborted!");
-        return null;
     }
 
 }

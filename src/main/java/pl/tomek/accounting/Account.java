@@ -1,6 +1,7 @@
 package pl.tomek.accounting;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Account {
                 date.getMonth().name() +
                 ". Total number of rentals: " +
                 numberOfRentals.get(index) + ". Income:" +
-                earnings.get(index);
+                NumberFormat.getCurrencyInstance().format(earnings.get(index));
         System.out.println(sb);
     }
 
@@ -53,7 +54,7 @@ public class Account {
                     Month.of(i + 1).name() +
                     ". Total number of rentals: " +
                     numberOfRentals.get(i) + ". Income:" +
-                    earnings.get(i);
+                    NumberFormat.getCurrencyInstance().format(earnings.get(i));
             System.out.println(sb);
         }
         System.out.println(sumYearMessaage());

@@ -1,5 +1,7 @@
 package pl.tomek.car;
 
+import pl.tomek.main.Validate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,14 +50,14 @@ public class AvailableCars {
         System.out.println("Give item number to change rent price");
         int number = in.nextInt();
         System.out.println("Give new rental prive: ");
-        double newPrice = in.nextDouble();
-        availableCars.get(number-1).setRent(newPrice);
+        availableCars.get(number-1).setRent(in.nextBigDecimal());
     }
 
     public void addNewCar()
     {
-        if(Car.makeNewCar()!=null)
-            availableCars.add(Car.makeNewCar());
+        Car car = Validate.validateNewCar();
+        if(car != null)
+            availableCars.add(car);
     }
 
     public Car getCar(int i) {

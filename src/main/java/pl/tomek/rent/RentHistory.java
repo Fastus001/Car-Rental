@@ -18,7 +18,7 @@ public class RentHistory {
 
     public void showAllRentedCars()
     {
-        System.out.println("Active rentals:\n");
+        System.out.println("Active rentals:");
 
         for (int i = 0; i < rentHistory.size(); i++) {
                 System.out.println((i+1)+": " + rentHistory.get(i).showCars());
@@ -44,9 +44,8 @@ public class RentHistory {
 
             double d = disc/10.0;
             BigDecimal discount = BigDecimal.valueOf(d);
-            System.out.println(discount);
             BigDecimal amount = car.getRentCost().multiply(BigDecimal.valueOf(days)).multiply(discount);
-            System.out.print("Rent will cost "+ amount + "Are you sure ? [yes/no]");
+            System.out.print("Rent will cost "+ amount + ". Are you sure ? [yes/no]");
             String yesOrNo = in.next();
             if(yesOrNo.contains("yes"))
             {
